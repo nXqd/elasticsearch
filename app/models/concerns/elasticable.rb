@@ -5,7 +5,7 @@ module Elasticable
     def es_find(params={})
       client = ESClient.new
 
-      result = Oj.load(client.get index: 'omni', type: 'books', id: params[:id])
+      result = Oj.load(client.get index: ES_INDEX, type: 'books', id: params[:id])
 
       return nil unless result["exists"]
       puts result["exists"]

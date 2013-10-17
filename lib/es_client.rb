@@ -4,8 +4,7 @@ require 'elasticsearch/api'
 
 class ESClient
   include Elasticsearch::API
-  ELASTICSEARCH_ENDPOINT = 'http://localhost:9200'
-  CONNECTION = ::Faraday::Connection.new url: ELASTICSEARCH_ENDPOINT
+  CONNECTION = ::Faraday::Connection.new url: ES_HOST
 
   def perform_request(method, path, params, body)
     puts "--> #{method.upcase} #{path} #{params} #{body}"

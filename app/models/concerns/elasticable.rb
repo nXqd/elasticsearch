@@ -2,10 +2,16 @@ require_dependency 'es_client'
 
 module Elasticable
   module ClassMethods
+    # example of usage
+    # Model.es_find
     def es_find(params={})
       client = ESClient.new
 
-      result = Oj.load(client.get index: ES_INDEX, type: 'books', id: params[:id])
+      begin
+        result = Oj.load(client.get index: ES_INDEX, type: self.name.downcase, id: params[:id])
+      rescue Exception
+        return nil
+      end
 
       return nil unless result["exists"]
       puts result["exists"]
